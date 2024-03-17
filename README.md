@@ -1,27 +1,44 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/IzcH6WD-)
-# Desarrollo de Aplicaciones Web
-## Introducción al Asíncronismo
+[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/EEMCX3dO)
+[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-718a45dd9cf7e7f842a935f5ebbe5719a5e09af4491e668f4dbf3b35d5cca122.svg)](https://classroom.github.com/online_ide?assignment_repo_id=13819236&assignment_repo_type=AssignmentRepo)
+# Lista de Tareas
 
+Esta tarea consiste en crear una aplicación de lista de tareas utilizando HTML, CSS y JavaScript. La aplicación debe ser capaz de crear, eliminar y marcar tareas como completadas. Además, se espera que el diseño sea responsive y se adapte correctamente a las medidas de dispositivos móviles, tablets y desktops.
 
 ## Funcionalidades
 
-- Crear una aplicación web que se comunique con la API propuesta: https://thesimpsonsquoteapi.glitch.me/
-- Esta aplicación debe permitir consultar información de diferentes maneras, es obligatorio que de cada consulta se muestre en la aplicación desplegada: la frase dicha, el nombre del personaje y la foto del personaje.
-- Debe llamar al menos 3 endpoints diferentes, usted decide cuáles y de qué forma.
+- Crear nuevas tareas: Los usuarios deben poder agregar nuevas tareas a la lista utilizando un campo de entrada y un botón.
+- Eliminar tareas: Los usuarios deben poder eliminar tareas de la lista haciendo clic en un botón de eliminar.
+- Marcar tareas como completadas: Los usuarios deben poder marcar tareas como completadas haciendo clic en una casilla de verificación.
+
+## Diseño Responsive
+
+El diseño de la aplicación debe ser responsive y adaptarse correctamente a diferentes tamaños de pantalla. Se espera que la interfaz sea fácil de usar tanto en dispositivos móviles como en desktops.
 
 
-## Requisitos
-
-- Marcar el repositorio, recuerde que tarea que se entregue sin nombre será calificada con cero.
-- Desplegar la página, si no despliega la página no se realizará una evaluación y tendrá que subirlo posteriormente en el repositorio de tareas tardías, que se califica sobre 3.
-
+| Viewport                | Dimensiones (ancho x alto) |
+| ----------------------- | -------------------------- |
+| **Mobile Portrait**     | 320px x 480px              |
+| **Tablet Portraite**    | 768px x 1024p              |
+| **Desktop**             | +1024px                    |
 
 ## Rúbrica
 
 | Criterio           | Puntaje |
 |--------------------|---------|
 | Creatividad        | 1       |
-| Diseño             | 1       |
-| Calidad del código     | 1.5     |
-| Funcionalidad      | 1.5      |
+| Diseño Responsive | 0.5     |
+| HTML Semántico     | 0.5     |
+| Funcionalidad      | 3       |
 
+
+## Vista teléfono
+<img src="to_dos.ingreso.png">
+
+<img src="todos_lista.png">
+
+
+## Vista computador
+
+<img src="todos_ingreso2.png">
+
+<img src="Todoslista.png">

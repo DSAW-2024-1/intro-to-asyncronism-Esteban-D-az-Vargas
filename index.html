@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Random Quotes</title>
+<style>
+@font-face {
+  font-family: 'Simpsonfont';
+  src: url('fonts/Simpsonfont.ttf') format('truetype');
+}
+
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative; 
+    z-index: 0; 
+    background-color: rgb(250, 234, 143) ;
+  }
+  img {
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    height: 30vh;
+    width: 11vw;
+    
+    border-radius: 2%;
+  }
+  #verMas{
+    color: white;
+    margin-top: 3%;
+    background: #36384d;
+    transition: background 1s ease; 
+    width: 75vw;
+    height: 6vh;
+    border-radius: 5%;
+  }
+  
+  #verMas.hover {
+    background: linear-gradient(to right, #ff5377, #ff673e); 
+  }
+  #botona{
+    color: white;
+    background: #36384d;
+    width: 10vw;
+    border-radius: 5%;
+  }
+  
+  #botona.hover {
+    background: linear-gradient(to right, #ff5377, #ff673e); 
+  }
+  #quotes{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+
+  }
+  .quotes-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  .citas{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 4%;
+    border: 2px solid black;
+    margin: 1vw;
+    padding: 2vh;
+    width: 15vw;
+    height: 50vh;
+    gap: 2px;
+    overflow: hidden;
+    transition: height 0.5s ease; 
+    height: auto;
+    transition: height 0.5s ease, box-shadow 0.3s ease; 
+    height: auto; 
+    box-shadow: 0 0 5px transparent; 
+    background-image: url('cielo.jpg');
+    }
+    
+
+  .citas:hover {
+  height: auto; 
+  box-shadow: 0 0 2rem rgba(0, 0, 255, 0.5);
+}
+  .citas h2 {
+  margin-bottom: 0.1vh;
+}
+label{
+  background-color: aliceblue;
+}
+
+
+  .nubes {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh; 
+    z-index: 1; 
+    background: none; 
+  }
+
+  .img-izq,
+  .img-der {
+    position: absolute;
+    top: 0;
+    height: 100vh; 
+    width: 50%; 
+    overflow: hidden;
+    
+    animation-fill-mode: forwards;
+  }
+  h2{
+    background-color: aliceblue;
+  }
+p{
+  background-color: aliceblue;
+}
+  .img-der {
+    right: 0; 
+    left: auto; 
+    animation-name: moveRight; 
+    animation-duration: 4s;
+  }
+
+  .img-izq {
+    left: 0; 
+    right: auto; 
+    animation-name: moveLeft; 
+    animation-duration: 4s;
+  }
+
+  .img-izq img,
+  .img-der img {
+    height: 100%; 
+    width: 50vw; 
+  }
+
+  @keyframes moveRight {
+    from {
+      transform: translateX(0%);
+    }
+    to {
+      transform: translateX(100%);
+    }
+  }
+
+  @keyframes moveLeft {
+    from {
+      transform: translateX(0%);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+  #quoteForm{
+    
+    font-size: 5vh;
+    display: flex;
+    gap: 2vw;
+    background-image: url('cielo.jpg');
+    width: 70%;
+    padding: 4vw;
+
+    }
+  input{
+    height: 5vh;
+  }
+
+</style>
+</head>
+<body>
+<div class="nubes">
+  <div class="img-izq">
+    <img src="der.png" alt="Image1">
+  </div>
+  <div class="img-der">
+    <img src="izq.png" alt="Image2">
+  </div>
+</div>
+
+<div class="container" id="quoteContainer">
+  <form id="quoteForm">
+    <label for="character">Personaje:</label>
+    <input type="text" id="character" name="character" placeholder="Nombre">
+    <label for="count">Número de citas:</label>
+    <input type="number" id="count" name="count" min="1" value="1">
+    <button type="submit" id="botona">Ver citas</button>
+  </form>
+  <br>
+  <div id="quotes"></div>
+  <button id="verMas">Ver más</button>
+
+
+</div>
+
+<script>
+  
+  const boton = document.getElementById('verMas');
+  const botona = document.getElementById('botona'); 
+  function loadQuotes(character, count) {
+    let endpoint = "https://thesimpsonsquoteapi.glitch.me/quotes";
+
+    if (count) {
+        endpoint += "?count=" + count;
+    }
+    if (character){
+        endpoint += "&character=" + character;
+    }
+
+    fetch(endpoint)
+        .then(response => response.json())
+        .then(data => {
+            let quotesContainer = document.getElementById("quotes");
+            quotesContainer.innerHTML = ""; // Limpiar contenido anterior
+
+            
+            if (data.length === 0) {
+              let space=quotesContainer.createElement=("div");
+              quotesContainer.innerHTML = `<video src="Homero ocultándose en los arbustos HD _ LOS SIMPSON.mp4" controls autoplay></video>`;
+            } else {
+                let chunks = [];
+                for (let i = 0; i < data.length; i += 5) {
+                    chunks.push(data.slice(i, i + 5));
+                }
+
+                chunks.forEach(chunk => {
+                    let rowContainer = document.createElement("div");
+                    rowContainer.classList.add("quotes-row");
+                    chunk.forEach(quote => {
+                        let quoteElement = document.createElement("div");
+                        quoteElement.classList.add("citas");
+                        quoteElement.innerHTML = `
+                            <img src="${quote.image}" alt="Character Image">
+                            <h2>${quote.character}</h2>
+                            <p>${quote.quote}</p>
+                        `;
+                        rowContainer.appendChild(quoteElement);
+                    });
+                    quotesContainer.appendChild(rowContainer);
+                });
+            }
+        })
+        .catch(error => console.error("Error al cargar las citas:", error));
+}
+
+
+
+  document.getElementById("quoteForm").addEventListener("submit", function(event) {
+    event.preventDefault(); 
+    let character = document.getElementById("character").value.trim();
+    let count = document.getElementById("count").value.trim();
+    loadQuotes(character, count);
+  });
+  document.getElementById("verMas").addEventListener("click", function() {
+  
+  let currentCount = document.querySelectorAll('.citas').length;
+  
+  loadQuotes('', currentCount + 20);
+});
+
+
+const citas = document.querySelectorAll('.citas');
+
+citas.forEach(cita => {
+  cita.addEventListener('mouseover', () => {
+    const alturaCita = cita.scrollHeight;
+    cita.style.marginBottom = `${alturaCita}px`;
+  });
+
+  cita.addEventListener('mouseout', () => {
+    cita.style.marginBottom = '1vw';
+  });
+});
+
+ 
+  window.addEventListener('DOMContentLoaded', (event) => {
+  loadQuotes('', 20);
+  const nubes = document.querySelector('.nubes');
+  const imgIzq = document.querySelector('.img-izq');
+  const imgDer = document.querySelector('.img-der');
+
+  imgDer.addEventListener('animationend', () => {
+    nubes.style.zIndex = '-1';
+    imgIzq.style.zIndex = '0';
+    imgDer.style.zIndex = '0';
+  });
+});
+boton.addEventListener('mouseover', function() {
+        boton.classList.add('hover'); 
+  });
+      
+  boton.addEventListener('mouseout', function() {
+    boton.classList.remove('hover'); 
+  });
+
+  botona.addEventListener('mouseover', function() {
+        botona.classList.add('hover'); 
+  });
+      
+  botona.addEventListener('mouseout', function() {
+    botona.classList.remove('hover'); 
+  });
+</script>
+
+</body>
+</html>
